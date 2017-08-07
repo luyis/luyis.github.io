@@ -17,7 +17,7 @@
 <meta name="keywords" content="生活琐事">
 <meta property="og:type" content="article">
 <meta property="og:title" content="我的博客开通啦！">
-<meta property="og:url" content="http://yoursite.com/2017/08/07/我的博客开通啦！/index.html">
+<meta property="og:url" content="http://luyis.github.io/2017/08/07/我的博客开通啦！/index.html">
 <meta property="og:site_name" content="记录生活、记录美">
 <meta property="og:description" content="2017年8月7日，我的博客终于开通，从此要开始写文章了，欢迎大家订阅！">
 <meta property="og:locale" content="zh-Hans">
@@ -33,7 +33,7 @@
 
 
 
-    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="shortcut icon" href="/img/Coding.png">
 
 
 
@@ -77,7 +77,9 @@
 </script>
 
 
-    <script> yiliaConfig.jquery_ui = [false]; </script>
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
 
 
 
@@ -177,6 +179,8 @@
                     <nav class="header-nav">
                         <ul class="social">
                             
+                                <a class="fa Email" href="mailto:583657488@qq.com" title="Email"></a>
+                            
                                 <a class="fa GitHub" href="https://github.com/" title="GitHub"></a>
                             
                         </ul>
@@ -251,6 +255,8 @@
             <nav class="header-nav">
                         <ul class="social">
                             
+                                <a class="fa Email" target="_blank" href="mailto:583657488@qq.com" title="Email"></a>
+                            
                                 <a class="fa GitHub" target="_blank" href="https://github.com/" title="GitHub"></a>
                             
                         </ul>
@@ -306,8 +312,8 @@
         <p><span>发布时间:</span>2017-08-07, 19:47:48</p>
         <p><span>最后更新:</span>2017-08-07, 19:56:47</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/08/07/我的博客开通啦！/" title="我的博客开通啦！">http://yoursite.com/2017/08/07/我的博客开通啦！/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/08/07/我的博客开通啦！/　　作者: Robynn" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/08/07/我的博客开通啦！/" title="我的博客开通啦！">http://luyis.github.io/2017/08/07/我的博客开通啦！/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://luyis.github.io/2017/08/07/我的博客开通啦！/　　作者: Robynn" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -362,6 +368,18 @@
 
 
 
+    
+        <section class="youyan" id="comments">
+    <script>
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2141007';
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    <script> loadComment(); </script>
+    <div id="uyan_frame"></div>
+</section>
     
 
 
@@ -426,7 +444,7 @@
                 $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
             }
             else {
-                var backgroundnum = 5;
+                var backgroundnum = 6;
                 var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
                 $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
             }

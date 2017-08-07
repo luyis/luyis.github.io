@@ -16,7 +16,7 @@
 <meta name="description" content="享受每天的快乐">
 <meta property="og:type" content="website">
 <meta property="og:title" content="categories">
-<meta property="og:url" content="http://yoursite.com/categories/index.html">
+<meta property="og:url" content="http://luyis.github.io/categories/index.html">
 <meta property="og:site_name" content="记录生活、记录美">
 <meta property="og:description" content="享受每天的快乐">
 <meta property="og:locale" content="zh-Hans">
@@ -32,7 +32,7 @@
 
 
 
-    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="shortcut icon" href="/img/Coding.png">
 
 
 
@@ -76,7 +76,9 @@
 </script>
 
 
-    <script> yiliaConfig.jquery_ui = [false]; </script>
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
 
 
 
@@ -176,6 +178,8 @@
                     <nav class="header-nav">
                         <ul class="social">
                             
+                                <a class="fa Email" href="mailto:583657488@qq.com" title="Email"></a>
+                            
                                 <a class="fa GitHub" href="https://github.com/" title="GitHub"></a>
                             
                         </ul>
@@ -249,6 +253,8 @@
             </nav>
             <nav class="header-nav">
                         <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:583657488@qq.com" title="Email"></a>
                             
                                 <a class="fa GitHub" target="_blank" href="https://github.com/" title="GitHub"></a>
                             
@@ -388,7 +394,7 @@
                 $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
             }
             else {
-                var backgroundnum = 5;
+                var backgroundnum = 6;
                 var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
                 $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
             }
