@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://luyis.github.io/"/>
-  <updated>2017-08-07T11:56:47.000Z</updated>
+  <updated>2017-08-09T19:12:02.000Z</updated>
   <id>http://luyis.github.io/</id>
   
   <author>
@@ -16,26 +16,61 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>我的博客开通啦！</title>
-    <link href="http://luyis.github.io/2017/08/07/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E5%BC%80%E9%80%9A%E5%95%A6%EF%BC%81/"/>
-    <id>http://luyis.github.io/2017/08/07/我的博客开通啦！/</id>
-    <published>2017-08-07T11:47:48.000Z</published>
-    <updated>2017-08-07T11:56:47.000Z</updated>
+    <title>奇怪！为什么一个线程能访问到一个没有被初始化的对象？</title>
+    <link href="http://luyis.github.io/2017/08/10/%E5%BD%93%E4%B8%80%E4%B8%AA%E7%BA%BF%E7%A8%8B%E8%AE%BF%E9%97%AE%E4%BA%86%E4%B8%80%E4%B8%AA%E6%B2%A1%E6%9C%89%E5%88%9D%E5%A7%8B%E5%8C%96%E7%9A%84%E5%AF%B9%E8%B1%A1/"/>
+    <id>http://luyis.github.io/2017/08/10/当一个线程访问了一个没有初始化的对象/</id>
+    <published>2017-08-09T16:16:10.000Z</published>
+    <updated>2017-08-09T19:12:02.000Z</updated>
     
-    <content type="html"><![CDATA[<p>2017年8月7日，我的博客终于开通，从此要开始写文章了，欢迎大家订阅！<br><a id="more"></a></p>
-<h1 id="只要你要、只要我有"><a href="#只要你要、只要我有" class="headerlink" title="只要你要、只要我有"></a>只要你要、只要我有</h1><p> <em>这里测试下一级标题</em></p>
-<h2 id="哈哈"><a href="#哈哈" class="headerlink" title="哈哈"></a>哈哈</h2><p> <em>二级</em></p>]]></content>
+    <content type="html"><![CDATA[<h1 id="业务场景"><a href="#业务场景" class="headerlink" title="业务场景"></a>业务场景</h1><p>   难道你就不奇怪，没有被初始化的对象是怎么出现的吗？😳<br><a id="more"></a><br>   如果一个对象的初始化操作非常昂贵，这时候可以考虑<font color="red"><strong>Lazy Initialization</strong></font>。<br>   比如获取数据库连接资源、APP启动速度过慢等。<br>   但是要实现线程安全的Lazy Initialization需要一些技巧，这就是文章标题的由来！</p>
+<p>我们先来看一段代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UnsafeLazyInitializationDemo</span> </span>&#123;</div><div class="line">   <span class="keyword">private</span> <span class="keyword">static</span> Instance instance;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Instance <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="keyword">if</span> (instance == <span class="keyword">null</span>) <span class="comment">//1：A线程执行</span></div><div class="line">           instance = <span class="keyword">new</span> Instance(); <span class="comment">//2：B线程执行</span></div><div class="line">      <span class="keyword">return</span> instance;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>假如静态方法getInstance()被两个线程A和B访问、当A执行到1的时候可能条件语句是false的，直接返回了还未被初始化instance，后续用这个instance处理一些逻辑就会出现不可预知的问题了。</p>
+<p>问题大概知道了，那有什么办法解决呢？<br>1、synchronized同步：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SafeLazyInitializationDemo</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Instance instance;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">static</span> Instance <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>)</div><div class="line">            instance = <span class="keyword">new</span> Instance();</div><div class="line">        <span class="keyword">return</span> instance;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<font color="green">synchronized将导致性能开销。如果getInstance()被多个线程频繁的调用，将会导致程序执行性能的下降</font>
+
+</blockquote>
+<p>2、进阶方案：double-checked locking<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DoubleCheckedLockingDemo</span> </span>&#123;                  <span class="comment">//1</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Instance instance;                    <span class="comment">//2</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Instance <span class="title">getInstance</span><span class="params">()</span> </span>&#123;               <span class="comment">//3</span></div><div class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;                          <span class="comment">//4:第一次检查</span></div><div class="line">            <span class="keyword">synchronized</span> (DoubleCheckedLocking.class) &#123;  <span class="comment">//5:加锁</span></div><div class="line">                <span class="keyword">if</span> (instance == <span class="keyword">null</span>)                    <span class="comment">//6:第二次检查</span></div><div class="line">                    instance = <span class="keyword">new</span> Instance();           <span class="comment">//7:问题的根源出在这里</span></div><div class="line">            &#125;                                            <span class="comment">//8</span></div><div class="line">        &#125;                                                <span class="comment">//9</span></div><div class="line">        <span class="keyword">return</span> instance;                                 <span class="comment">//10</span></div><div class="line">    &#125;                                                    <span class="comment">//11</span></div><div class="line">&#125;                                                        <span class="comment">//12</span></div></pre></td></tr></table></figure></p>
+<p>但是在执行到4的时候，和UnsafeLazyInitializationDemo有同样的问题。</p>
+<h1 id="分析问题"><a href="#分析问题" class="headerlink" title="分析问题"></a>分析问题</h1><p>为什么会产生这样的现象呢？那是因为JVM对new操作的处理过程如下：</p>
+<font color="red">1、memory = allocate();     //1：分配对象的内存空间<br>2、ctorInstance(memory);    //2：初始化对象<br>3、instance = memory;       //3：设置instance指向刚分配的内存地址</font>
+
+<p>其中2和3可以指令重排序、单线程指令重排序可以提高性能</p>
+<blockquote>
+<p><font color="red"><em>The Java Language Specification, Java SE 7 Edition</em></font> 的intra-thread semantics规则保证重排序不会改变单线程内的程序执行结果</p>
+</blockquote>
+<p>但是多线程就不能保证了！</p>
+<p>问题根源：<br>1、不允许2和3重排序；<br>2、允许2和3重排序，但不允许其他线程“看到”这个重排序。<br>我们可以想出两个办法来实现线程安全的延迟初始化：</p>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><h2 id="基于volatile的double-checked-locking的解决方案"><a href="#基于volatile的double-checked-locking的解决方案" class="headerlink" title="基于volatile的double-checked locking的解决方案"></a>基于volatile的double-checked locking的解决方案</h2><p>原理：不允许2和3重排序<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SafeDoubleCheckedLockingDemo</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Instance instance;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Instance <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">synchronized</span> (SafeDoubleCheckedLocking.class) &#123;</div><div class="line">                <span class="keyword">if</span> (instance == <span class="keyword">null</span>)</div><div class="line">                    instance = <span class="keyword">new</span> Instance();<span class="comment">//instance为volatile，现在没问题了</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> instance;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="基于类初始化的解决方案"><a href="#基于类初始化的解决方案" class="headerlink" title="基于类初始化的解决方案"></a>基于类初始化的解决方案</h2><p>原理：允许2和3重排序，但不允许其他线程“看到”这个重排序</p>
+<blockquote>
+<p>JVM在类的初始化阶段（即在Class被加载后，且被线程使用之前），会执行类的初始化。在执行类的初始化期间，JVM会去获取一个锁。这个锁可以同步多个线程对同一个类的初始化。<br>有兴趣可以看看JVM的类加载过程。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassLoaderDemo</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">InstanceHolder</span> </span>&#123;</div><div class="line">        <span class="keyword">public</span> <span class="keyword">static</span> Instance instance = <span class="keyword">new</span> Instance();</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Instance <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> InstanceHolder.instance ;  <span class="comment">//&lt;font color="red"&gt;这里将导致InstanceHolder类被初始化&lt;/font&gt;&gt;</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>初始化一个类，包括执行这个类的静态初始化和初始化在这个类中声明的静态字段。根据java语言规范，在首次发生下列任意一种情况时，一个类或接口类型T将被立即初始化：</p>
+<blockquote>
+<p>1、T是一个类，而且一个T类型的实例被创建；<br>2、T是一个类，且T中声明的一个静态方法被调用；<br>3、T中声明的一个静态字段被赋值；<br>4、T中声明的一个静态字段被使用，而且这个字段不是一个常量字段；<br>5、T是一个顶级类（top level class，见java语言规范的§7.6），而且一个断言语句嵌套在T内部被执行。</p>
+</blockquote>
+<p>在InstanceFactory示例代码中，首次执行getInstance()的线程将导致InstanceHolder类被初始化（符合情况4）。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>如果确实需要对实例字段使用线程安全的延迟初始化，请使用上面介绍的基于volatile的延迟初始化的方案；如果确实需要对静态字段使用线程安全的延迟初始化，请使用上面介绍的基于类初始化的方案</p>
+<blockquote>
+<font color="red">Effective Java 建议慎用Lazy Initialization</font>
+
+</blockquote>
+<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>1、很像单例模式？没错！是的</p>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;2017年8月7日，我的博客终于开通，从此要开始写文章了，欢迎大家订阅！&lt;br&gt;
+      &lt;h1 id=&quot;业务场景&quot;&gt;&lt;a href=&quot;#业务场景&quot; class=&quot;headerlink&quot; title=&quot;业务场景&quot;&gt;&lt;/a&gt;业务场景&lt;/h1&gt;&lt;p&gt;   难道你就不奇怪，没有被初始化的对象是怎么出现的吗？😳&lt;br&gt;
     
     </summary>
     
-      <category term="daily" scheme="http://luyis.github.io/categories/daily/"/>
+      <category term="Java基础" scheme="http://luyis.github.io/categories/Java%E5%9F%BA%E7%A1%80/"/>
     
     
-      <category term="生活琐事" scheme="http://luyis.github.io/tags/%E7%94%9F%E6%B4%BB%E7%90%90%E4%BA%8B/"/>
+      <category term="Effective Java" scheme="http://luyis.github.io/tags/Effective-Java/"/>
+    
+      <category term="面向模式的软件体系架构卷三中Lazy Acquisition模式" scheme="http://luyis.github.io/tags/%E9%9D%A2%E5%90%91%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%BD%AF%E4%BB%B6%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84%E5%8D%B7%E4%B8%89%E4%B8%ADLazy-Acquisition%E6%A8%A1%E5%BC%8F/"/>
     
   </entry>
   
