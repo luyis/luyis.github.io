@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="记录生活、记录美">
 <meta property="og:description" content="业务场景   难道你就不奇怪，没有被初始化的对象是怎么出现的吗？😳">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-09T19:12:02.000Z">
+<meta property="og:updated_time" content="2017-08-09T19:14:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="奇怪！为什么一个线程能访问到一个没有被初始化的对象？">
 <meta name="twitter:description" content="业务场景   难道你就不奇怪，没有被初始化的对象是怎么出现的吗？😳">
@@ -327,7 +327,7 @@
 <blockquote>
 <p>1、T是一个类，而且一个T类型的实例被创建；<br>2、T是一个类，且T中声明的一个静态方法被调用；<br>3、T中声明的一个静态字段被赋值；<br>4、T中声明的一个静态字段被使用，而且这个字段不是一个常量字段；<br>5、T是一个顶级类（top level class，见java语言规范的§7.6），而且一个断言语句嵌套在T内部被执行。</p>
 </blockquote>
-<p>在InstanceFactory示例代码中，首次执行getInstance()的线程将导致InstanceHolder类被初始化（符合情况4）。</p>
+<p>在ClassLoaderDemo示例代码中，首次执行getInstance()的线程将导致InstanceHolder类被初始化（符合情况4）。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>如果确实需要对实例字段使用线程安全的延迟初始化，请使用上面介绍的基于volatile的延迟初始化的方案；如果确实需要对静态字段使用线程安全的延迟初始化，请使用上面介绍的基于类初始化的方案</p>
 <blockquote>
 <font color="red">Effective Java 建议慎用Lazy Initialization</font>
@@ -343,7 +343,7 @@
         <p><span>本文标题:</span><a href="/2017/08/10/当一个线程访问了一个没有初始化的对象/">奇怪！为什么一个线程能访问到一个没有被初始化的对象？</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Robynn</a></p>
         <p><span>发布时间:</span>2017-08-10, 00:16:10</p>
-        <p><span>最后更新:</span>2017-08-10, 03:12:02</p>
+        <p><span>最后更新:</span>2017-08-10, 03:14:18</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/08/10/当一个线程访问了一个没有初始化的对象/" title="奇怪！为什么一个线程能访问到一个没有被初始化的对象？">http://luyis.github.io/2017/08/10/当一个线程访问了一个没有初始化的对象/</a>
             <span class="copy-path" data-clipboard-text="原文: http://luyis.github.io/2017/08/10/当一个线程访问了一个没有初始化的对象/　　作者: Robynn" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

@@ -34,7 +34,7 @@
 <blockquote>
 <p>1、T是一个类，而且一个T类型的实例被创建；<br>2、T是一个类，且T中声明的一个静态方法被调用；<br>3、T中声明的一个静态字段被赋值；<br>4、T中声明的一个静态字段被使用，而且这个字段不是一个常量字段；<br>5、T是一个顶级类（top level class，见java语言规范的§7.6），而且一个断言语句嵌套在T内部被执行。</p>
 </blockquote>
-<p>在InstanceFactory示例代码中，首次执行getInstance()的线程将导致InstanceHolder类被初始化（符合情况4）。</p>
+<p>在ClassLoaderDemo示例代码中，首次执行getInstance()的线程将导致InstanceHolder类被初始化（符合情况4）。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>如果确实需要对实例字段使用线程安全的延迟初始化，请使用上面介绍的基于volatile的延迟初始化的方案；如果确实需要对静态字段使用线程安全的延迟初始化，请使用上面介绍的基于类初始化的方案</p>
 <blockquote>
 <font color="red">Effective Java 建议慎用Lazy Initialization</font>
