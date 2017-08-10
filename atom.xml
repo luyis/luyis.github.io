@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://luyis.github.io/"/>
-  <updated>2017-08-10T01:46:49.000Z</updated>
+  <updated>2017-08-10T16:24:45.000Z</updated>
   <id>http://luyis.github.io/</id>
   
   <author>
@@ -14,6 +14,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>致橡树</title>
+    <link href="http://luyis.github.io/2017/08/10/%E8%87%B4%E6%A9%A1%E6%A0%91/"/>
+    <id>http://luyis.github.io/2017/08/10/致橡树/</id>
+    <published>2017-08-10T15:43:29.000Z</published>
+    <updated>2017-08-10T16:24:45.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>我觉得这首诗挺美的，就贴过来了！</p>
+<a id="more"></a>
+<p><img src="/images/小红.jpeg" alt="致橡树"></p>
+<p><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=489998494&auto=1&height=66"></iframe><br>致橡树<br>我如果爱你——<br>　　绝不像攀援的凌霄花，<br>　　借你的高枝炫耀自己；<br>　　我如果爱你——<br>　　绝不学痴情的鸟儿，<br>　　为绿荫重复单调的歌曲；<br>　　也不止像泉源，<br>　　常年送来清凉的慰藉；<br>　　也不止像险峰，<br>　　增加你的高度，衬托你的威仪。<br>　　甚至日光，<br>　　甚至春雨。<br>    不，这些都还不够！<br>　　我必须是你近旁的一株木棉，<br>　　作为树的形象和你站在一起。<br>　　根，紧握在地下；<br>　　叶，相触在云里。<br>　　每一阵风过，<br>　　我们都互相致意，<br>　　但没有人，<br>　　听懂我们的言语。<br>　　你有你的铜枝铁干，<br>　　像刀，像剑，也像戟；<br>　　我有我红硕的花朵，<br>　　像沉重的叹息，<br>　　又像英勇的火炬。<br>   我们分担寒潮、风雷、霹雳；<br>　　我们共享雾霭、流岚、虹霓。<br>　　仿佛永远分离，<br>　　却又终身相依。<br>　　这才是伟大的爱情，<br>　　坚贞就在这里：<br>　　爱——<br>　　不仅爱你伟岸的身躯，<br>　　也爱你坚持的位置，<br>　　足下的土地。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我觉得这首诗挺美的，就贴过来了！&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="诗词歌赋" scheme="http://luyis.github.io/categories/%E8%AF%97%E8%AF%8D%E6%AD%8C%E8%B5%8B/"/>
+    
+    
+      <category term="花前月下" scheme="http://luyis.github.io/tags/%E8%8A%B1%E5%89%8D%E6%9C%88%E4%B8%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>奇怪！为什么一个线程能访问到一个没有被初始化的对象？</title>
