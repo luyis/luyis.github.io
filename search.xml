@@ -40,7 +40,7 @@
 <font color="red">Effective Java 建议慎用Lazy Initialization</font>
 
 </blockquote>
-<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>1、很像单例模式？没错！是的</p>]]></content>
+<h1 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h1><p>1、单例模式<br>2、JVM类加载<br>3、synchronized关键字<br>4、volatile关键字</p>]]></content>
       
         <categories>
             
