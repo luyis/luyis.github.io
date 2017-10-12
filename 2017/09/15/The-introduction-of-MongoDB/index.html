@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="Robynn">
+
+
+
+<meta name="keywords" content="NoSQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The introduction of MongoDB">
+<meta property="og:url" content="http://luyis.github.io/2017/09/15/The-introduction-of-MongoDB/index.html">
+<meta property="og:site_name" content="记录生活、记录美">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://luyis.github.io/images/mongoDB.png">
+<meta property="og:image" content="https://docs.mongodb.com/manual/_images/crud-annotated-document.bakedsvg.svg">
+<meta property="og:image" content="http://luyis.github.io/images/mongoDB架构.jpeg">
+<meta property="og:image" content="http://luyis.github.io/images/对比结构图.jpeg">
+<meta property="og:image" content="http://luyis.github.io/images/document.jpeg">
+<meta property="og:image" content="http://luyis.github.io/images/引用.jpeg">
+<meta property="og:image" content="http://luyis.github.io/images/嵌入.jpeg">
+<meta property="og:image" content="http://luyis.github.io/images/objectId.jpeg">
+<meta property="og:image" content="http://luyis.github.io/images/索引种类.jpeg">
+<meta property="og:image" content="http://luyis.github.io/images/应用场景.dms">
+<meta property="og:image" content="http://luyis.github.io/images/波多老师.jpeg">
+<meta property="og:updated_time" content="2017-10-12T10:52:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="The introduction of MongoDB">
+<meta name="twitter:image" content="http://luyis.github.io/images/mongoDB.png">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="记录生活、记录美" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/img/Coding.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>The introduction of MongoDB | 记录生活、记录美</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/cat.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Robynn</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">如果我爱你</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false">
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class="no-result">No results found <i class="fa fa-spinner fa-pulse"></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:583657488@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Effective-Java/">Effective Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NoSQL/">NoSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/花前月下/">花前月下</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面向模式的软件体系架构卷三中Lazy-Acquisition模式/">面向模式的软件体系架构卷三中Lazy Acquisition模式</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://theme-next.iissnan.com/">Next</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.coding.me/yelee/">Yelee</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://coolshell.cn/">🐭</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专门胡说八道</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Robynn</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/cat.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Robynn</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">如果我爱你</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:583657488@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
+</nav>
+      <div class="body-wrap"><article id="post-The-introduction-of-MongoDB" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/09/15/The-introduction-of-MongoDB/" class="article-date">
+      <time datetime="2017-09-15T13:23:04.000Z" itemprop="datePublished">2017-09-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 class="article-title" itemprop="name">
+      The introduction of MongoDB
+    </h1>
+      </header>
+      
+      <div class="article-info article-info-post">
+        <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/数据库/">数据库</a>
+    </div>
+        <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NoSQL/">NoSQL</a></li></ul>
+    </div>
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p> <img src="/images/mongoDB.png" alt=""><br> <a id="more"></a><br>    感谢在生命的最好的年华中，遇见了你—网易云音乐</p>
+ <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=439915614&auto=0&height=66"></iframe>
+
+<h1 id="MongoDB的发展"><a href="#MongoDB的发展" class="headerlink" title="MongoDB的发展"></a><strong>MongoDB的发展</strong></h1><p>2007年10月，MongoDB由10gen团队所发展。2009年2月首度推出、现在稳定版是3.4. <font color="red">现在社区非常繁荣</font></p>
+<p>MongoDB是什么?<br>   1、MongoDB is an open-source document database that provides high performance, high availability, and automatic scaling.<br>   2、MongoDB 是由C++语言编写的,支持多种编程语言<br>   3、MongoDB 是一个面向集合的,模式自由的文档型数据库<br>   4、它在许多场景下可用于替代传统的关系型数据库或键/值存储方式</p>
+<p>   主要特征：<br>      1、高性能 （数据模型有关、减少与数据库系统的I/O交互次数、内嵌和引用）<br>      2、丰富的查询语言 （CRUD、Data Aggregation、文件检索、地理空间查询）<br>      3、高可用性 （自动故障恢复、数据冗余）<br>      4、水平扩展能力 （分片）<br>      5、高性能 （多个存储引擎的支持 默认是WiredTiger）</p>
+<p>   文档结构:<br>   MongoDB中的一条记录就是一个文档，是一个数据结构，由字段和值对组成。MongoDB文档与JSON对象类似。字段的值有可能包括其它文档、数组以及文档数组</p>
+<p><img src="https://docs.mongodb.com/manual/_images/crud-annotated-document.bakedsvg.svg" alt=""></p>
+<h1 id="BSON"><a href="#BSON" class="headerlink" title="BSON"></a><strong>BSON</strong></h1><p>在MongoDB中，文档是对数据的抽象，由于 MongoDB 支持嵌入文档、数组和哈希等多种复杂数据结构的使用，所以它最终将所有的数据以<font color="red"><strong>BSON</strong></font> 的数据格式存储起来<br>BSON是一个轻量级的二进制数据格式。MongoDB能够使用BSON，并将BSON作为数据存储存放在磁盘中。</p>
+<font color="red"><strong>使用BSON格式出于以下3种目的：</strong></font>
+
+<table>
+<thead>
+<tr>
+<th>BSON特征</th>
+<th>优势</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><font color="red">效率</font></td>
+<td>BSON是为效率而设计的，它只需要使用很少的空间。即使在最坏的情况下，BSON格式也比JSON格式在最好的情况下存储效率高。</td>
+</tr>
+<tr>
+<td><font color="red">传输性</font></td>
+<td>在某些情况下，BSON会牺牲额外的空间让数据的传输更加方便。比如，字符串的传输的前缀会标识字符串的长度，而不是在字符串的末尾打上结束的标记。这样的传输形式有利于MongoDB修改传输的数据。</td>
+</tr>
+<tr>
+<td><font color="red">性能</font></td>
+<td>最后，BSON格式的编码和解码都是非常快速的。它使用了C风格的数据表现形式，这样在各种语言中都可以高效地使用。</td>
+</tr>
+</tbody>
+</table>
+<p>更多关于BSON的介绍，可以参考：<a href="http://www.bsonspec.org" target="_blank" rel="external">http://www.bsonspec.org</a></p>
+<h1 id="MongoDB架构"><a href="#MongoDB架构" class="headerlink" title="MongoDB架构"></a><strong>MongoDB架构</strong></h1><p>现有流行的数据库其实都有着非常相似的架构，MongoDB 其实就与 MySQL 中的架构相差不多，底层都使用了<font color="red">可插拔</font>的存储引擎以满足用户的不同需要<br><img src="/images/mongoDB架构.jpeg" alt=""><br>用户可以根据表中的数据特征选择不同的存储引擎，它们可以在同一个 MongoDB 的实例中使用；在最新版本的 MongoDB 中使用了 WiredTiger 作为默认的存储引擎，WiredTiger 提供了不同粒度的并发控制和压缩机制，能够为不同种类的应用提供了最好的性能和存储效率</p>
+<h1 id="概念映射关系"><a href="#概念映射关系" class="headerlink" title="概念映射关系"></a><strong>概念映射关系</strong></h1><p><img src="/images/对比结构图.jpeg" alt=""></p>
+<h1 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a><strong>数据模型</strong></h1><p>1、存储在MongoDB中的数据有着非常灵活的Schema。我们不需要在插入数据之前就要定义好表中的数据结构，而且MongoDB不对Collection的数据结构进行任何限制，但是在实际使用中，同一个Collection中的大多数文档都具有类似的结构。<br><img src="/images/document.jpeg" alt=""><br>2、由于文档具有复杂的结构，所以在为MongoDB应用设计数据模型时，如何表示数据模型之间的关系其实是需要开发者需要仔细考虑的，这样才能利用MongoDB提供的诸多特性提升查询的效率，MongoDB 为表示文档之间的关系提供了两种不同的方法：<font color="red">引用和嵌入</font></p>
+<p>引用(Reference):<br><img src="/images/引用.jpeg" alt=""><br>标准化的数据模型，类似mysql的外键，但是由于mongoDB不支持join，所以增加了客户端和MongoDB 之间的交互次数（Round-Trip）也会导致查询变慢，甚至非常严重的性能问题</p>
+<p>嵌入(Embedded):<br><img src="/images/嵌入.jpeg" alt=""><br>不标准的数据模型,子文档是父文档的一个值<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  _id: &lt;ObjectId1&gt;,</div><div class="line">  username: "changfen",</div><div class="line">  age: 18,</div><div class="line">  contact: [</div><div class="line">    &#123;</div><div class="line">      _id: &lt;ObjectId2&gt;,</div><div class="line">      email: "changfen@2dfire.cn"</div><div class="line">    &#125;</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>适用于包含关系的数据关系，例如用户与联系方式</p>
+<h1 id="主键和索引"><a href="#主键和索引" class="headerlink" title="主键和索引"></a><strong>主键和索引</strong></h1><p>默认索引（主键）<br>MongoDB中所有的文档也都有一个唯一的 _id字段，在默认情况下所有的文档都使用一个长12字节的 ObjectId 作为默认索引：<br><img src="/images/objectId.jpeg" alt=""><br>前四位代表当前 _id 生成时的 Unix 时间戳，在这之后是三位的机器标识符和两位的处理器标识符，最后是一个三位的计数器，初始值就是一个随机数；通过这种方式代替递增的 id 能够解决分布式的 MongoDB 生成唯一标识符的问题，同时可以在一定程度上保证 id 的的增长是递增的。</p>
+<p>mongoDB的索引与mysql的索引差不多，无论是底层的数据结构还是索引类型都几乎完全相同，只是mongoDB支持更多的索引种类<br><img src="/images/索引种类.jpeg" alt=""></p>
+<table>
+<thead>
+<tr>
+<th>索引类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单字段索引</td>
+<td>db.users.createIndex( { age: -1 } )<br>db.users.createIndex( { age: 1 } )</td>
+</tr>
+<tr>
+<td>复合索引</td>
+<td>db.users.createIndex( { username: 1, age: -1 } )<br>db.users.createIndex( { username: 1, age: 1 } )</td>
+</tr>
+<tr>
+<td>多键索引</td>
+<td>db.collection.createIndex( { address: 1 } )<br>多键索引与单键索引创建形式相同，区别在于字段的值<br>单键索引：值为一个单一的值，例如字符串，数字或者日期，<br>多键索引：值具有多个记录，例如数组</td>
+</tr>
+<tr>
+<td>文本索引</td>
+<td>业务上更推荐Elasticsearch这种专业的搜索</td>
+</tr>
+<tr>
+<td>地理位置索引</td>
+<td>附近的店铺等</td>
+</tr>
+<tr>
+<td>其他索引</td>
+<td>有兴趣可以研究下</td>
+</tr>
+</tbody>
+</table>
+<h1 id="API例子"><a href="#API例子" class="headerlink" title="API例子"></a><strong>API例子</strong></h1><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>例子</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>插入</td>
+<td>db.inventory.insertOne(<br>{ item: “canvas”, qty: 100, tags: [“cotton”], size: { h: 28, w: 35.5, uom: “cm” } }<br>)</td>
+<td>插入单条记录</td>
+</tr>
+<tr>
+<td>插入多条</td>
+<td>db.inventory.insertMany([<br>{ item: “journal”, qty: 25, size: { h: 14, w: 21, uom: “cm” }, status: “A” },<br>{ item: “notebook”, qty: 50, size: { h: 8.5, w: 11, uom: “in” }, status: “A” },<br>{ item: “paper”, qty: 100, size: { h: 8.5, w: 11, uom: “in” }, status: “D” },<br>{ item: “planner”, qty: 75, size: { h: 22.85, w: 30, uom: “cm” }, status: “D” },<br>{ item: “postcard”, qty: 45, size: { h: 10, w: 15.25, uom: “cm” }, status: “A” }<br>])</td>
+<td>插入多条记录</td>
+</tr>
+<tr>
+<td>查询</td>
+<td>db.inventory.find( { item: “canvas” } )<br>db.inventory.find( { status: { $in: [ “A”, “D” ] } } )<br>db.inventory.find( { status: “A”, qty: { $lt: 30 } } )<br>db.inventory.find( { $or: [ { status: “A” }, { qty: { $lt: 30 } } ] } )</td>
+<td>查询<br>SELECT <em> FROM inventory WHERE item = “canvas”<br>SELECT </em> FROM inventory WHERE status in (“A”, “D”)<br>SELECT <em> FROM inventory WHERE status = “A” AND qty &lt; 30<br>SELECT </em> FROM inventory WHERE status = “A” OR qty &lt; 30</td>
+</tr>
+</tbody>
+</table>
+<p>以上只是一些简单的例子，mongoDB语法非常丰富，而且提供了几乎世面上所有流行的l  编程语言的API</p>
+<h1 id="Morphia"><a href="#Morphia" class="headerlink" title="Morphia"></a><strong>Morphia</strong></h1><p>由于mongoDB语法不太友好（特别对于我们java开发者），所以推荐Morphia这个官方版的ODM工具</p>
+<h1 id="MongoDB应用场景"><a href="#MongoDB应用场景" class="headerlink" title="MongoDB应用场景"></a><strong>MongoDB应用场景</strong></h1><p>1、游戏场景，使用 MongoDB 存储游戏用户信息，用户的装备、积分等直接以内嵌文档的形式存储，方便查询、更新<br>2、物流场景，使用 MongoDB 存储订单信息，订单状态在运送过程中会不断更新，以 MongoDB 内嵌数组的形式来存储，一次查询就能将订单所有的变更读取出来。<br>3、社交场景，使用 MongoDB 存储存储用户信息，以及用户发表的朋友圈信息，通过地理位置索引实现附近的人、地点等功能<br>4、物联网场景，使用 MongoDB 存储所有接入的智能设备信息，以及设备汇报的日志信息，并对这些信息进行多维度的分析<br>5、视频直播，使用 MongoDB 存储用户信息、礼物信息等<br>6、······等等<br><img src="/images/应用场景.dms" alt=""></p>
+<h1 id="MongoDB的优点与缺点"><a href="#MongoDB的优点与缺点" class="headerlink" title="MongoDB的优点与缺点"></a><strong>MongoDB的优点与缺点</strong></h1><table>
+<thead>
+<tr>
+<th>MongoDB特性</th>
+<th>优势</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>事务支持</td>
+<td>MongoDB目前只支持单文档事务，需要复杂事务支持的场景暂时不适合</td>
+</tr>
+<tr>
+<td>灵活的文档模型</td>
+<td>JSON格式存储最接近真实对象模型，对开发者友好，方便快速开发迭代</td>
+</tr>
+<tr>
+<td>高可用复制集</td>
+<td>满足数据高可靠、服务高可用的需求，运维简单，故障自动切换</td>
+</tr>
+<tr>
+<td>可扩展分片集群</td>
+<td>海量数据存储，服务能力水平扩展</td>
+</tr>
+<tr>
+<td>高性能</td>
+<td>mmapv1、wiredtiger、mongorocks（rocksdb）、in-memory 等多引擎支持满足各种场景需求</td>
+</tr>
+<tr>
+<td>强大的索引支持</td>
+<td>地理位置索引可用于构建各种O2O 应用、文本索引解决搜索的需求、TTL索引解决历史数据自动过期的需求</td>
+</tr>
+<tr>
+<td>Gridfs</td>
+<td>解决文件存储的需求</td>
+</tr>
+<tr>
+<td>aggregation &amp; mapreduce</td>
+<td>解决数据分析场景需求，用户可以自己写查询语句或脚本，将请求都分发到 MongoDB 上完成</td>
+</tr>
+</tbody>
+</table>
+<p>1、厂商的噱头，并不是说NoSQL一定比关系型数据库好，因为数据库的性能不止与数据库本身的设计有关系，还与开发者对表结构和索引的设计、存储引擎的选择和业务有着巨大的关系!<br>2、MongoDB布道者TJ博士设计了几个选择题来辅助我们是否应该使用MongoDB</p>
+<table>
+<thead>
+<tr>
+<th>应用特征</th>
+<th>YES / NO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>应用不需要事务及复杂join支持</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>新应用，需求会变，数据模型无法确定，想快速迭代开发</td>
+<td>？</td>
+</tr>
+<tr>
+<td>应用需要2000-3000以上的读写QPS（更高也可以）</td>
+<td>？</td>
+</tr>
+<tr>
+<td>应用需要TB甚至 PB 级别数据存储</td>
+<td>?</td>
+</tr>
+<tr>
+<td>应用发展迅速，需要能快速水平扩展</td>
+<td>?</td>
+</tr>
+<tr>
+<td>应用要求存储的数据不丢失</td>
+<td>?</td>
+</tr>
+<tr>
+<td>应用需要99.999%高可用</td>
+<td>?</td>
+</tr>
+<tr>
+<td>应用需要大量的地理位置查询、文本查询</td>
+<td>？</td>
+</tr>
+</tbody>
+</table>
+<p>如果上述有1个 Yes，可以考虑 MongoDB，2个及以上的 Yes，选择 MongoDB 绝不会后悔</p>
+<h1 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a><strong>扩展阅读</strong></h1><p>1、WiredTiger存储引擎实现<br>2、MongoDB 复制集原理实现</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a><strong>参考资料</strong></h1><p><a href="https://docs.mongodb.com/manual/?_ga=2.190019746.885390148.1505483057-1629220430.1505483057" target="_blank" rel="external">MongoDB官方文档</a><br><a href="https://www.mongodb.com/zh/mongodb-architecture" target="_blank" rel="external">MongoDB架构指南</a></p>
+<h1 id="干货"><a href="#干货" class="headerlink" title="干货"></a><strong>干货</strong></h1><p><img src="/images/波多老师.jpeg" alt=""></p>
+      
+    </div>
+    
+  </div>
+  
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/09/15/The-introduction-of-MongoDB/">The introduction of MongoDB</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Robynn</a></p>
+        <p><span>发布时间:</span>2017-09-15, 21:23:04</p>
+        <p><span>最后更新:</span>2017-10-12, 18:52:33</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/09/15/The-introduction-of-MongoDB/" title="The introduction of MongoDB">http://luyis.github.io/2017/09/15/The-introduction-of-MongoDB/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://luyis.github.io/2017/09/15/The-introduction-of-MongoDB/　　作者: Robynn" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/08/10/致橡树/">
+                    致橡树
+                </a>
+            </div>
+        
+    </nav>
+  
+</article>
+<div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MongoDB的发展"><span class="toc-number">1.</span> <span class="toc-text">MongoDB的发展</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#BSON"><span class="toc-number">2.</span> <span class="toc-text">BSON</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MongoDB架构"><span class="toc-number">3.</span> <span class="toc-text">MongoDB架构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#概念映射关系"><span class="toc-number">4.</span> <span class="toc-text">概念映射关系</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据模型"><span class="toc-number">5.</span> <span class="toc-text">数据模型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#主键和索引"><span class="toc-number">6.</span> <span class="toc-text">主键和索引</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#API例子"><span class="toc-number">7.</span> <span class="toc-text">API例子</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Morphia"><span class="toc-number">8.</span> <span class="toc-text">Morphia</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MongoDB应用场景"><span class="toc-number">9.</span> <span class="toc-text">MongoDB应用场景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MongoDB的优点与缺点"><span class="toc-number">10.</span> <span class="toc-text">MongoDB的优点与缺点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#扩展阅读"><span class="toc-number">11.</span> <span class="toc-text">扩展阅读</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-number">12.</span> <span class="toc-text">参考资料</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#干货"><span class="toc-number">13.</span> <span class="toc-text">干货</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+    <div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"The introduction of MongoDB　| 记录生活、记录美　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+    
+        <section class="youyan" id="comments">
+    <script>
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2141007';
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    <script> loadComment(); </script>
+    <div id="uyan_frame"></div>
+</section>
+    
+
+
+<div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/08/10/致橡树/" title="下一篇: 致橡树">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/09/15/The-introduction-of-MongoDB/">The introduction of MongoDB</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/10/致橡树/">致橡树</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/10/当一个线程访问了一个没有初始化的对象/">奇怪！为什么一个线程能访问到一个没有被初始化的对象？</a></li></ul>
+
+
+    <script>
+        
+    </script></div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2017 Robynn
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit" title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    <script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+<script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 6;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide()" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>

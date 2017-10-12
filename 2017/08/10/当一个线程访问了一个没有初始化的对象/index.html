@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="记录生活、记录美">
 <meta property="og:description" content="业务场景   难道你就不奇怪，没有被初始化的对象是怎么出现的吗？😳">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-10T01:46:49.000Z">
+<meta property="og:updated_time" content="2017-09-16T12:32:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="奇怪！为什么一个线程能访问到一个没有被初始化的对象？">
 <meta name="twitter:description" content="业务场景   难道你就不奇怪，没有被初始化的对象是怎么出现的吗？😳">
@@ -190,7 +190,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Effective-Java/">Effective Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/花前月下/">花前月下</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面向模式的软件体系架构卷三中Lazy-Acquisition模式/">面向模式的软件体系架构卷三中Lazy Acquisition模式</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Effective-Java/">Effective Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NoSQL/">NoSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/花前月下/">花前月下</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面向模式的软件体系架构卷三中Lazy-Acquisition模式/">面向模式的软件体系架构卷三中Lazy Acquisition模式</a></li></ul>
                     </div>
                 </section>
                 
@@ -300,7 +300,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="业务场景"><a href="#业务场景" class="headerlink" title="业务场景"></a>业务场景</h1><p>   难道你就不奇怪，没有被初始化的对象是怎么出现的吗？😳<br><a id="more"></a><br>   如果一个对象的初始化操作非常昂贵，这时候可以考虑<font color="red"><strong>Lazy Initialization</strong></font>。<br>   比如获取数据库连接资源、APP启动速度过慢等。<br>   但是要实现线程安全的Lazy Initialization需要一些技巧。</p>
+        <h1 id="业务场景"><a href="#业务场景" class="headerlink" title="业务场景"></a>业务场景</h1><p>   难道你就不奇怪，没有被初始化的对象是怎么出现的吗？😳<br><a id="more"></a><br>   如果一个对象的初始化操作非常昂贵，这时候可以考虑<font color="red"><strong>Lazy Initialization</strong></font>。<br>   比如获取数据库连接资源、APP启动速度过慢等。<br>   但是要实现线程安全的Lazy Initialization需要一些技巧。<br>）</p>
 <p>我们先来看一段代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UnsafeLazyInitializationDemo</span> </span>&#123;</div><div class="line">   <span class="keyword">private</span> <span class="keyword">static</span> Instance instance;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Instance <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="keyword">if</span> (instance == <span class="keyword">null</span>) <span class="comment">//1：A线程执行</span></div><div class="line">           instance = <span class="keyword">new</span> Instance(); <span class="comment">//2：B线程执行</span></div><div class="line">      <span class="keyword">return</span> instance;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>假如静态方法getInstance()被两个线程A和B访问、当A执行到1的时候可能条件语句是false的，直接返回了还未被初始化instance，后续用这个instance处理一些逻辑就会出现不可预知的问题了。</p>
 <p>问题大概知道了，那有什么办法解决呢？<br>1、synchronized同步：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SafeLazyInitializationDemo</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Instance instance;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">static</span> Instance <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>)</div><div class="line">            instance = <span class="keyword">new</span> Instance();</div><div class="line">        <span class="keyword">return</span> instance;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -345,7 +345,7 @@
         <p><span>本文标题:</span><a href="/2017/08/10/当一个线程访问了一个没有初始化的对象/">奇怪！为什么一个线程能访问到一个没有被初始化的对象？</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Robynn</a></p>
         <p><span>发布时间:</span>2017-08-10, 00:16:10</p>
-        <p><span>最后更新:</span>2017-08-10, 09:46:49</p>
+        <p><span>最后更新:</span>2017-09-16, 20:32:28</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/08/10/当一个线程访问了一个没有初始化的对象/" title="奇怪！为什么一个线程能访问到一个没有被初始化的对象？">http://luyis.github.io/2017/08/10/当一个线程访问了一个没有初始化的对象/</a>
             <span class="copy-path" data-clipboard-text="原文: http://luyis.github.io/2017/08/10/当一个线程访问了一个没有初始化的对象/　　作者: Robynn" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -445,7 +445,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/08/10/致橡树/">致橡树</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/10/当一个线程访问了一个没有初始化的对象/">奇怪！为什么一个线程能访问到一个没有被初始化的对象？</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/09/15/The-introduction-of-MongoDB/">The introduction of MongoDB</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/10/致橡树/">致橡树</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/10/当一个线程访问了一个没有初始化的对象/">奇怪！为什么一个线程能访问到一个没有被初始化的对象？</a></li></ul>
 
 
     <script>
