@@ -13,18 +13,18 @@
 
 
 
-<meta name="description" content="序言本文不追求系统和全面，也做不到如此，只是力求从不同的选点、角度和深度去展示个人的一点理解软件设计经常会被拿来和建筑设计去对比、但其实软件设计和它们的区别很大、那就是成型之后，需求是不停的变化、设计是需要响应这些变化的。你有听说过一座竣工的大厦，过一段时间要新加一个楼层就能往上加吗？不能！因为蓝图在设计之初就已经设计不变了，即不支持扩展性！所以软件设计后期随着需求的不停变化、复杂度逐步上升、往往">
+<meta name="description" content="前言本文不追求系统和全面，也做不到如此，只是力求从不同的选点、角度和深度去展示个人的一点理解">
 <meta name="keywords" content="小议抽象">
 <meta property="og:type" content="article">
 <meta property="og:title" content="我对抽象的理解">
 <meta property="og:url" content="http://luyis.github.io/2017/11/30/我对抽象的理解/index.html">
 <meta property="og:site_name" content="记录生活、记录美">
-<meta property="og:description" content="序言本文不追求系统和全面，也做不到如此，只是力求从不同的选点、角度和深度去展示个人的一点理解软件设计经常会被拿来和建筑设计去对比、但其实软件设计和它们的区别很大、那就是成型之后，需求是不停的变化、设计是需要响应这些变化的。你有听说过一座竣工的大厦，过一段时间要新加一个楼层就能往上加吗？不能！因为蓝图在设计之初就已经设计不变了，即不支持扩展性！所以软件设计后期随着需求的不停变化、复杂度逐步上升、往往">
+<meta property="og:description" content="前言本文不追求系统和全面，也做不到如此，只是力求从不同的选点、角度和深度去展示个人的一点理解">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-08T02:05:05.585Z">
+<meta property="og:updated_time" content="2017-12-08T02:32:32.446Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="我对抽象的理解">
-<meta name="twitter:description" content="序言本文不追求系统和全面，也做不到如此，只是力求从不同的选点、角度和深度去展示个人的一点理解软件设计经常会被拿来和建筑设计去对比、但其实软件设计和它们的区别很大、那就是成型之后，需求是不停的变化、设计是需要响应这些变化的。你有听说过一座竣工的大厦，过一段时间要新加一个楼层就能往上加吗？不能！因为蓝图在设计之初就已经设计不变了，即不支持扩展性！所以软件设计后期随着需求的不停变化、复杂度逐步上升、往往">
+<meta name="twitter:description" content="前言本文不追求系统和全面，也做不到如此，只是力求从不同的选点、角度和深度去展示个人的一点理解">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -300,9 +300,11 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="序言"><a href="#序言" class="headerlink" title="序言"></a><strong>序言</strong></h1><p>本文不追求系统和全面，也做不到如此，只是力求从不同的选点、角度和深度去展示个人的一点理解<br>软件设计经常会被拿来和建筑设计去对比、但其实软件设计和它们的区别很大、那就是成型之后，需求是不停的变化、设计是需要响应这些变化的。你有听说过一座竣工的大厦，过一段时间要新加一个楼层就能往上加吗？不能！因为蓝图在设计之初就已经设计不变了，即不支持扩展性！所以软件设计后期随着需求的不停变化、复杂度逐步上升、往往新加一个小功能就影响全局！所以要求我们在软件设计之初就要考虑好后期的扩展性，而抽象无疑是必由之路。抽象本身并不能解决问题，通过抽象能简化和分解问题，使之更容易理解和控制，相应的解法也更具稳定性、普适性、重用性和可维护性。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a><strong>前言</strong></h1><p>本文不追求系统和全面，也做不到如此，只是力求从不同的选点、角度和深度去展示个人的一点理解<br><a id="more"></a></p>
+<p>软件设计经常会被拿来和建筑设计去对比、但其实软件设计和它们的区别很大、那就是成型之后，需求是不停的变化、设计是需要响应这些变化的。你有听说过一座竣工的大厦，过一段时间要新加一个楼层就能往上加吗？不能！因为蓝图在设计之初就已经设计不变了，即不支持扩展性！所以软件设计后期随着需求的不停变化、复杂度逐步上升、往往新加一个小功能就影响全局！所以要求我们在软件设计之初就要考虑好后期的扩展性，而抽象无疑是必由之路。抽象本身并不能解决问题，通过抽象能简化和分解问题，使之更容易理解和控制，相应的解法也更具稳定性、普适性、重用性和可维护性。</p>
 <h1 id="程序员的能力"><a href="#程序员的能力" class="headerlink" title="程序员的能力"></a><strong>程序员的能力</strong></h1><p>如果有人问程序员最重要的能力是什么？学习能力、逻辑思维能力、解决问题能力、沟通能力等等～～～<br>其实TMD都很重要！所以coder是苦逼的！但是在软件设计领域、抽象思维能力还是蛮重要的！</p>
-<h1 id="抽象的定义"><a href="#抽象的定义" class="headerlink" title="抽象的定义"></a><strong>抽象的定义</strong></h1><p>   1、广义：抽象是人类认识和描绘世界最首要的工具！<br>   2、狭义：抽象就是作减法和除法<br>           减法：去粗取精<br>           除法：异中求同、同类归并<br>           结果：大数变小数、复杂变简单<br>2、语法和语义的区别、抽象是语义上的概念<br>3、抽象贯穿OOA、OOD、OOP三个阶段，扮演着不同的角色<br>   在软件工程中，系统开发生命周期最核心的有三个阶段：分析、设计、实现。<br>   对应对象导向式的方法：OOA、OOD、OOP<br>   概念模型、数学模型、数据结构<br>   分析阶段前期：领域分析—领域模型是对系统所涉及的对应于现实世界的某些特定领域的抽象，是软件系统的核心和基石<br>   分析阶段后起：应用分析<br>   贯穿这3个阶段的主线正是抽象、并且抽象程度依次递减。<br>   实现阶段：常用两种抽象 参数抽象、规范抽象<br>   先验条件、后验条件、接口设计、规范说明 ：功能与实现相分离的方法称为规范抽象<br>   契约式设计：异常机制和断言<br>   防御性编程<br>   借助这两种抽象机制，我们可以实现五类基本抽象：<br>   1、过程抽象（ procedural abstraction）赋予程序员自定义运算（ operation）的能力<br>   2、数据抽象（ data abstraction）赋予程序员自定义类型（ type）的能力<br>   3、迭代抽象（ iteration abstraction） 赋予程序员自定义循环（ loop）的能力<br>   4、类型层级（ type hierarchy）赋予程序员自定义类族（ type family）的能力<br>   5、多态抽象（ polymorphic abstraction） 赋予程序员自定义多态类型（ polymorphic type）的能力。<br>    这中间， 过程抽象是过程范式的关键，大家已经非常熟悉了。 迭代抽象也不陌生， 我们在讨论泛型 范式时提到的迭代器（ iterator）便是迭代抽象的结果。 类型层级涉及对象范式中的继承，多态 抽象涉及对象范式与泛型范式中的多态，下面主要谈谈数据抽象，它是OOP的起源。</p>
+<h1 id="抽象的定义"><a href="#抽象的定义" class="headerlink" title="抽象的定义"></a><strong>抽象的定义</strong></h1><p>   1、广义：抽象是人类认识和描绘世界最首要的工具！<br>   2、狭义：抽象就是作减法和除法<br>—- | —–<br>减法：| 去粗取精<br>除法：| 异中求同、同类归并<br>结果：| 大数变小数、复杂变简单</p>
+<p>2、语法和语义的区别、抽象是语义上的概念<br>3、抽象贯穿OOA、OOD、OOP三个阶段，扮演着不同的角色<br>   在软件工程中，系统开发生命周期最核心的有三个阶段：分析、设计、实现。<br>   对应对象导向式的方法：OOA、OOD、OOP<br>   概念模型、数学模型、数据结构<br>   分析阶段前期：领域分析—领域模型是对系统所涉及的对应于现实世界的某些特定领域的抽象，是软件系统的核心和基石<br>   分析阶段后起：应用分析<br>   贯穿这3个阶段的主线正是抽象、并且抽象程度依次递减。<br>   实现阶段：常用两种抽象 参数抽象、规范抽象<br>   先验条件、后验条件、接口设计、规范说明 ：功能与实现相分离的方法称为规范抽象<br>   契约式设计：异常机制和断言<br>   防御性编程<br>   借助这两种抽象机制，我们可以实现五类基本抽象：<br>   1、过程抽象（ procedural abstraction）赋予程序员自定义运算（ operation）的能力<br>   2、数据抽象（ data abstraction）赋予程序员自定义类型（ type）的能力<br>   3、迭代抽象（ iteration abstraction） 赋予程序员自定义循环（ loop）的能力<br>   4、类型层级（ type hierarchy）赋予程序员自定义类族（ type family）的能力<br>   5、多态抽象（ polymorphic abstraction） 赋予程序员自定义多态类型（ polymorphic type）的能力。<br>    这中间， 过程抽象是过程范式的关键，大家已经非常熟悉了。 迭代抽象也不陌生， 我们在讨论泛型 范式时提到的迭代器（ iterator）便是迭代抽象的结果。 类型层级涉及对象范式中的继承，多态 抽象涉及对象范式与泛型范式中的多态，下面主要谈谈数据抽象，它是OOP的起源。</p>
 <p>4、从Java的封装、继承、多态又是如何理解抽象的<br>5、抽象和接口放在一起对比真的合适吗？面向对象编程和面向接口编程的区别，代码复用！<br>接口的定义 广义上的定义和狭义上的区别<br>6、对象系统和面向对象系统的区别<br>7、抽象能力的几个层次：<br>     抽象的第一重，是将具体问题抽象成一个函数（或者类）用程序解决<br>     抽象的第二重，是撰写出可以解决多个问题的函数。解耦 范化 寻找共性<br>     抽象的第三重，是基础模型的建立。寻找共性和联系（这在我看来是领域建模）<br>     抽象的第四重，是制定规则，建立解决整个问题空间的一个世界，这就是元编程<br>8、以上几点纯属胡说八道、不要当真、因为每个人对抽象的理解有角度之分和程度之别</p>
       
     </div>
@@ -313,7 +315,7 @@
         <p><span>本文标题:</span><a href="/2017/11/30/我对抽象的理解/">我对抽象的理解</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Robynn</a></p>
         <p><span>发布时间:</span>2017-11-30, 19:52:55</p>
-        <p><span>最后更新:</span>2017-12-08, 10:05:05</p>
+        <p><span>最后更新:</span>2017-12-08, 10:32:32</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/11/30/我对抽象的理解/" title="我对抽象的理解">http://luyis.github.io/2017/11/30/我对抽象的理解/</a>
             <span class="copy-path" data-clipboard-text="原文: http://luyis.github.io/2017/11/30/我对抽象的理解/　　作者: Robynn" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -341,7 +343,7 @@
 <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#序言"><span class="toc-number">1.</span> <span class="toc-text">序言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#程序员的能力"><span class="toc-number">2.</span> <span class="toc-text">程序员的能力</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#抽象的定义"><span class="toc-number">3.</span> <span class="toc-text">抽象的定义</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#程序员的能力"><span class="toc-number">2.</span> <span class="toc-text">程序员的能力</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#抽象的定义"><span class="toc-number">3.</span> <span class="toc-text">抽象的定义</span></a></li></ol>
         
     </div>
     <style>
