@@ -13,18 +13,20 @@
 
 
 
-<meta name="description" content="前言本文不追求系统和全面，也做不到如此，只是力求从不同的选点、角度和深度去展示个人的一点理解">
+<meta name="description" content="郑重声明：本文有误人子弟之嫌，概不负责！胡说八道正式开始～～～">
 <meta name="keywords" content="小议抽象">
 <meta property="og:type" content="article">
 <meta property="og:title" content="我对抽象的理解">
 <meta property="og:url" content="http://luyis.github.io/2017/11/30/我对抽象的理解/index.html">
 <meta property="og:site_name" content="记录生活、记录美">
-<meta property="og:description" content="前言本文不追求系统和全面，也做不到如此，只是力求从不同的选点、角度和深度去展示个人的一点理解">
+<meta property="og:description" content="郑重声明：本文有误人子弟之嫌，概不负责！胡说八道正式开始～～～">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-08T02:43:01.181Z">
+<meta property="og:image" content="http://luyis.github.io/images/ADT.jpeg">
+<meta property="og:updated_time" content="2017-12-12T18:31:45.248Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="我对抽象的理解">
-<meta name="twitter:description" content="前言本文不追求系统和全面，也做不到如此，只是力求从不同的选点、角度和深度去展示个人的一点理解">
+<meta name="twitter:description" content="郑重声明：本文有误人子弟之嫌，概不负责！胡说八道正式开始～～～">
+<meta name="twitter:image" content="http://luyis.github.io/images/ADT.jpeg">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -300,12 +302,223 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a><strong>前言</strong></h1><p>本文不追求系统和全面，也做不到如此，只是力求从不同的选点、角度和深度去展示个人的一点理解<br><a id="more"></a></p>
-<p>软件设计经常会被拿来和建筑设计去对比、但其实软件设计和它们的区别很大、那就是成型之后，需求是不停的变化、设计是需要响应这些变化的。你有听说过一座竣工的大厦，过一段时间要新加一个楼层就能往上加吗？不能！因为蓝图在设计之初就已经设计不变了，即不支持扩展性！所以软件设计后期随着需求的不停变化、复杂度逐步上升、往往新加一个小功能就影响全局！所以要求我们在软件设计之初就要考虑好后期的扩展性，而抽象无疑是必由之路。抽象本身并不能解决问题，通过抽象能简化和分解问题，使之更容易理解和控制，相应的解法也更具稳定性、普适性、重用性和可维护性。</p>
-<h1 id="程序员的能力"><a href="#程序员的能力" class="headerlink" title="程序员的能力"></a><strong>程序员的能力</strong></h1><p>如果有人问程序员最重要的能力是什么？学习能力、逻辑思维能力、解决问题能力、沟通能力等等～～～<br>其实TMD都很重要！所以coder是苦逼的！但是在软件设计领域、抽象思维能力还是蛮重要的！</p>
-<h1 id="抽象的定义"><a href="#抽象的定义" class="headerlink" title="抽象的定义"></a><strong>抽象的定义</strong></h1><p>   1、广义：抽象是人类认识和描绘世界最首要的工具！<br>   2、狭义：抽象就是作减法和除法<br>操作 |  结果<br>—- | —–<br>减法：| 去粗取精<br>除法：| 异中求同、同类归并<br>结果：| 大数变小数、复杂变简单</p>
-<p>2、语法和语义的区别、抽象是语义上的概念<br>3、抽象贯穿OOA、OOD、OOP三个阶段，扮演着不同的角色<br>   在软件工程中，系统开发生命周期最核心的有三个阶段：分析、设计、实现。<br>   对应对象导向式的方法：OOA、OOD、OOP<br>   概念模型、数学模型、数据结构<br>   分析阶段前期：领域分析—领域模型是对系统所涉及的对应于现实世界的某些特定领域的抽象，是软件系统的核心和基石<br>   分析阶段后起：应用分析<br>   贯穿这3个阶段的主线正是抽象、并且抽象程度依次递减。<br>   实现阶段：常用两种抽象 参数抽象、规范抽象<br>   先验条件、后验条件、接口设计、规范说明 ：功能与实现相分离的方法称为规范抽象<br>   契约式设计：异常机制和断言<br>   防御性编程<br>   借助这两种抽象机制，我们可以实现五类基本抽象：<br>   1、过程抽象（ procedural abstraction）赋予程序员自定义运算（ operation）的能力<br>   2、数据抽象（ data abstraction）赋予程序员自定义类型（ type）的能力<br>   3、迭代抽象（ iteration abstraction） 赋予程序员自定义循环（ loop）的能力<br>   4、类型层级（ type hierarchy）赋予程序员自定义类族（ type family）的能力<br>   5、多态抽象（ polymorphic abstraction） 赋予程序员自定义多态类型（ polymorphic type）的能力。<br>    这中间， 过程抽象是过程范式的关键，大家已经非常熟悉了。 迭代抽象也不陌生， 我们在讨论泛型 范式时提到的迭代器（ iterator）便是迭代抽象的结果。 类型层级涉及对象范式中的继承，多态 抽象涉及对象范式与泛型范式中的多态，下面主要谈谈数据抽象，它是OOP的起源。</p>
-<p>4、从Java的封装、继承、多态又是如何理解抽象的<br>5、抽象和接口放在一起对比真的合适吗？面向对象编程和面向接口编程的区别，代码复用！<br>接口的定义 广义上的定义和狭义上的区别<br>6、对象系统和面向对象系统的区别<br>7、抽象能力的几个层次：<br>     抽象的第一重，是将具体问题抽象成一个函数（或者类）用程序解决<br>     抽象的第二重，是撰写出可以解决多个问题的函数。解耦 范化 寻找共性<br>     抽象的第三重，是基础模型的建立。寻找共性和联系（这在我看来是领域建模）<br>     抽象的第四重，是制定规则，建立解决整个问题空间的一个世界，这就是元编程<br>8、以上几点纯属胡说八道、不要当真、因为每个人对抽象的理解有角度之分和程度之别</p>
+        <p><font color="red" size="6"><strong>郑重声明：本文有误人子弟之嫌，概不负责！胡说八道正式开始～～～</strong></font><br><a id="more"></a></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a><strong>前言</strong></h1><p>&emsp;&emsp;软件设计经常会被拿来和建筑设计去对比、但其实软件设计和它们的区别很大、那就是成型之后，需求是不停的变化、设计是需要响应这些变化的。你有听说过一座竣工的大厦，过一段时间要新加一个楼层就能往上加吗？不能！因为蓝图在设计之初就已经设计不变了，即不支持扩展性！所以软件设计后期随着需求的不停变化、复杂度逐步上升、往往新加一个小功能就影响全局！所以要求我们在软件设计之初就要考虑好后期的扩展性，而抽象无疑是必由之路。抽象本身并不能解决问题，通过抽象能简化和分解问题，使之更容易理解和控制，相应的解法也更具稳定性、普适性、重用性和可维护性。</p>
+<h1 id="抽象的定义"><a href="#抽象的定义" class="headerlink" title="抽象的定义"></a><strong>抽象的定义</strong></h1><p>1、广义：抽象是人类认识和描绘世界最首要的工具！<br>2、狭义：抽象就是作减法和除法 </p>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>减法：</td>
+<td>去粗取精</td>
+</tr>
+<tr>
+<td>除法：</td>
+<td>异中求同、同类归并</td>
+</tr>
+<tr>
+<td>结果：</td>
+<td>大数变小数、复杂变简单</td>
+</tr>
+</tbody>
+</table>
+<h1 id="抽象贯穿OOA、OOD、OOP三个阶段，扮演着不同的角色"><a href="#抽象贯穿OOA、OOD、OOP三个阶段，扮演着不同的角色" class="headerlink" title="抽象贯穿OOA、OOD、OOP三个阶段，扮演着不同的角色"></a><strong>抽象贯穿OOA、OOD、OOP三个阶段，扮演着不同的角色</strong></h1><p>在软件工程中，系统开发生命周期最核心的有三个阶段：分析、设计、实现。对应对象导向式的方法：OOA、OOD、OOP</p>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>关注点</th>
+<th>操作</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OOA</td>
+<td>概念模型</td>
+<td>领域分析、应用分析、制定功能规范</td>
+<td>以对象为中心</td>
+</tr>
+<tr>
+<td>OOD</td>
+<td>数学模型</td>
+<td>制定实现规范</td>
+<td>以接口为中心</td>
+</tr>
+<tr>
+<td>OOP</td>
+<td>数据结构</td>
+<td>编码</td>
+<td>以数据为中心</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>贯穿这3个阶段的主线正是抽象、并且抽象程度依次递减。</p>
+<h1 id="抽象机制"><a href="#抽象机制" class="headerlink" title="抽象机制"></a><strong>抽象机制</strong></h1><p>常用两种抽象：参数抽象、规范抽象</p>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>参数抽象</td>
+<td>形参</td>
+</tr>
+<tr>
+<td>规范抽象</td>
+<td>先验条件、后验条件<br>规范说明：功能与实现相分离的方法称为规范抽象</td>
+</tr>
+</tbody>
+</table>
+<h1 id="契约式设计与防御式编程"><a href="#契约式设计与防御式编程" class="headerlink" title="契约式设计与防御式编程"></a><strong>契约式设计与防御式编程</strong></h1><p>有了参数抽象和规范抽象并不能保证设计出一个良好的接口，所以出现了契约式设计<br>契约式设计的定义：</p>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>性质</th>
+<th>语言支持</th>
+<th>特点</th>
+<th>功效</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>契约式设计</td>
+<td>先君子后小人</td>
+<td>异常机制和断言</td>
+<td>职责清晰</td>
+<td>保障程序的正确性</td>
+</tr>
+<tr>
+<td>防御性编程</td>
+<td>先小人后君子</td>
+<td>任何语言都支持</td>
+<td>职责不清晰</td>
+<td>保障程序的健壮性</td>
+</tr>
+</tbody>
+</table>
+<p>两种方式相辅相成，保证软件系统的可靠性！</p>
+<h1 id="五类基本抽象"><a href="#五类基本抽象" class="headerlink" title="五类基本抽象"></a><strong>五类基本抽象</strong></h1><table>
+<thead>
+<tr>
+<th>抽象类型</th>
+<th>能力</th>
+<th>说明</th>
+<th>抽象引入</th>
+<th>抽象结果</th>
+<th>抽象目的</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>过程抽象</td>
+<td>赋予程序员自定义运算的能力</td>
+<td>过程范式</td>
+<td>运算</td>
+<td>函数</td>
+<td>将行为的逻辑属性与实现细节分离</td>
+</tr>
+<tr>
+<td>数据抽象</td>
+<td>赋予程序员自定义类型的能力</td>
+<td>OOP的起源</td>
+<td>类型</td>
+<td>抽象数据类型</td>
+<td>将数据的逻辑属性与表示细节分离</td>
+</tr>
+<tr>
+<td>迭代抽象</td>
+<td>赋予程序员自定义循环的能力</td>
+<td>泛型范式的迭代器</td>
+<td>循环</td>
+<td>迭代器</td>
+<td>将集合遍历与元素的获取细节分离</td>
+</tr>
+<tr>
+<td>类型层级</td>
+<td>赋予程序员自定义类族的能力</td>
+<td>对象范式中的继承</td>
+<td>类族</td>
+<td>类型层级结构</td>
+<td>将类型家族的公共行为与具体类型分离</td>
+</tr>
+<tr>
+<td>多态抽象</td>
+<td>赋予程序员自定义多态类型的能力</td>
+<td>对象范式与泛型范式中的多态</td>
+<td>多态类型</td>
+<td>抽象类型（OOP）<br>参数类型（GP）</td>
+<td>将类型的接口规范与实现代码分离<br>将类型与算法分离</td>
+</tr>
+</tbody>
+</table>
+<h1 id="数据抽象—OOP的核心和起源"><a href="#数据抽象—OOP的核心和起源" class="headerlink" title="数据抽象—OOP的核心和起源"></a><strong>数据抽象—OOP的核心和起源</strong></h1><p>&emsp;&emsp;首先我们介绍一个重要的概念，抽象数据类型（ADT）,如果一个数据类型依赖于具体实现，它就是具体（DTO），反之则是抽象（queue）。<font color="red">它关心的是抽象接口而不是具体实现。</font><br>&emsp;&emsp;现在举个例子来说明数据抽象，队列queue想必大家都比较清楚了，无论底层是用数组实现还是列表实现，其实用户根本不需关心，<font color="red">这便是队列的抽象所在</font>—用户不应知道 也不必知道它的具体实现,只能通过指定接口来进行‘暗箱操作’。这样经过数据抽象，队列的本质特征由API展现,非本质特征则屏蔽于客户的视野之外。</p>
+<blockquote>
+<blockquote>
+<p><font color="red">结论</font>：参数抽象使得数据接口普适化，规范抽象使得数据接口契约化。一个完整的数据抽象除了对每个接口作规范说明外，还须对该数据类型作整体规范说明，OOP中的类注释文档即作此用。有了整体的规范描述，一个抽象数据类型才能真正在客户头脑中抽象化和概念化！</p>
+</blockquote>
+</blockquote>
+<h1 id="封装、继承、多态"><a href="#封装、继承、多态" class="headerlink" title="封装、继承、多态"></a><strong>封装、继承、多态</strong></h1><p>抽象（尤其数据抽象）是OOP的核心和起源，是封装、继承和多态的基础。下面从这三个方面来理解抽象<br>1、封装是什么？<br>&emsp;&emsp;将数据与行为包装在一起，这只是广义上的封装—打包！狭义上封装是在打包的基础上加上访问控制，以实现信息隐藏(掩盖实现细节)。</p>
+<blockquote>
+<blockquote>
+<p>1、抽象意味着用户可以从高层的接口来看待或使用一类对象，而不用关心它底层的实现，而封装意味着用户不需要也无权访问底层的实现。”<br>  2、要记住信息隐藏是原则，封装只是一种实现方式</p>
+</blockquote>
+</blockquote>
+<p>2、继承是什么？<br>&emsp;&emsp;子类继承父类或者子类遗传父类这两种说法其实都是不准确的，我所理解的继承是一种泛化关系。子类通过泛化得到父类，这是一种概念抽象的过程；父类通过特化得到子类。这是一种概念细化的过程；在设计过程中两种设计往往交替使用—–<strong>而这就是五种基本抽象之一类型层级</strong>。特别要注意：某些教科书上用衍生关系去描述继承关系是不对，这个真的是误人子弟，稍后带来例子<br>&emsp;&emsp;常见的继承有两种：类继承和接口继承。那继承的作用是什么?在回答这个问题之前，还要再问一个问题，面向对象编程中，最重要的思想是什么？是封装？是继承？是多态吗？都不对！应该是代码重用，严格来说应该是代码被重用。所以现在知道继承的作用是什么了吧？<br>&emsp;&emsp;类继承很好理解代码重用的观点，可以重用父类的代码，但是接口继承怎么重用？实现代码都没有啊！<br>&emsp;&emsp;抽象接口是控制反转的关键，通过抽象出一系列接口，并在这些接口上进行操作，使得控制逻辑不依赖于具体的实现；同时，具体的实现可以并不关心控制逻辑如何使用自己，它们会在需要的时候被调用。由此，使用对象的逻辑和对象本身充分解耦，由接口这座桥梁将二者联系起来。这样，代码得到了最大程度的被重用。是不是有点眼熟？没错，这就是面向接口编程的由来！</p>
+<blockquote>
+<blockquote>
+<p><strong>实现继承消费可重用的旧代码，接口继承生产可重用的新代码</strong></p>
+</blockquote>
+</blockquote>
+<p>谈到接口继承，不得不提 Liskov substitution principle（里氏变换原则），wikipedia 这样介绍它：</p>
+<blockquote>
+<blockquote>
+<p>It states that, in a computer program, if S is a subtype of T, then objects of type T may be replaced with objects of type S.</p>
+</blockquote>
+</blockquote>
+<p>这也是面向对象编程中常说的Substitutability（可替换性）。这段话翻译过来说就是，在类型系统中，如果类型S是类型T的子类型，那么类型T的任意对象可以被类型S的对象替换，且不影响程序的正确性。里氏变换是面向对象编程（其实适用于任何编程思想）非常重要的一个原则，也是程序得以多态的基石。如果我们做一个系统，要注意尽一切可能满足这一原则。</p>
+<p>现在我们来举个经典例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Bird</span></span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fly</span><span class="params">()</span></span>;<span class="comment">//鸟会飞</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lay</span><span class="params">()</span></span>;<span class="comment">//鸟会下蛋</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Penguin</span> <span class="keyword">implements</span> <span class="title">Bird</span></span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fly</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException(<span class="string">"企鹅不会飞"</span>)  </div><div class="line">  &#125;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">walk</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="comment">//企鹅会走路</span></div><div class="line">  &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lay</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="comment">//企鹅会下蛋</span></div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//客户代码</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">letGo</span><span class="params">(Bird bird)</span></span>&#123;</div><div class="line">  <span class="keyword">if</span> (bird <span class="keyword">instanceof</span> Penguin)&#123;</div><div class="line">      ((Penguin)bird).walk(); </div><div class="line">    &#125;</div><div class="line">  <span class="keyword">else</span> &#123;</div><div class="line">    bird.fly();</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>由于企鹅是一种鸟，因此继承了Bird，为此不得不实现fly方法。但企鹅并不会飞，只好抛出UnsupportedOperationException的异常。其后果是客户代码不得不为这种特殊类型作特别处理，否则整个流程会被破坏。 类似地，如果还存在一个Ostrich类，由于鸵鸟不会飞只会跑，以上客户代码又得变成这样<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">letGo</span><span class="params">(Bird bird)</span></span>&#123;</div><div class="line">  <span class="keyword">if</span> (bird <span class="keyword">instanceof</span> Penguin)&#123;</div><div class="line">      ((Penguin)bird).walk(); </div><div class="line">  &#125;</div><div class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (bird <span class="keyword">instanceof</span> Ostrich)&#123;</div><div class="line">    ((Ostrich)bird).run();</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">else</span> &#123;</div><div class="line">    bird.fly();</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这严重违反OCP原则,因为它对修改不是封闭的，以后代码为了兼容会越来越难看，这就是符合我们的生活逻辑但是不符合LSP设计的例子，所以用衍生关系去理解继承关系是有问题的，这就是一种蹩脚的设计！</p>
+<blockquote>
+<blockquote>
+<p>接口继承是为了代码被重用，但是必须建立在LSP原则之上！</p>
+</blockquote>
+</blockquote>
+<p>错就错在不应该把Penguin和Ostrich当作Bird的子类型，至于解决方案，大家可以想想～～</p>
+<blockquote>
+<blockquote>
+<p>继承的主要作用：通过实现继承完成代码重用；通过接口继承完成代码被重用；建立概念的分类体系。</p>
+</blockquote>
+</blockquote>
+<p>至于怎么合理使用继承，这里就不介绍了，内容太多，没准备～～～主要还是大家多多思考！</p>
+<p>3、多态是什么？<br>多态是动静结合的产物，将静态类型的安全性和动态类型的灵活性融为一体。<br>静态类型语言中一般有两种实现方式： </p>
+<blockquote>
+<blockquote>
+<p>一种利用GP（泛型编程）中的参数多态（parametric polymorphism）。<br>一种利用OOP中的包含多态（inclusion polymorphism）或称子类型多态（subtyping polymorphism）。</p>
+</blockquote>
+</blockquote>
+<p>参数多态：让相同的实现代码应用于不同的场合<br>包含多态：让不同的实现代码应用于相同的场合<br>多态机制是保证代码的灵活性、可维护性和可重用性的终极武器。</p>
+<p>举例子说明下:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**一个可以验证用户名和密码的类*/</span> </div><div class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Authenticator</span> </span>&#123;</div><div class="line"> <span class="comment">/**保存用户名和密码 */</span> </div><div class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">final</span>  <span class="keyword">void</span> <span class="title">save</span><span class="params">( String user, String password)</span> </span>&#123;</div><div class="line">  <span class="keyword">if</span> (password == <span class="keyword">null</span>) &#123;</div><div class="line">      password = <span class="string">""</span>;</div><div class="line">  &#125; </div><div class="line">  store(user,encrypt(password)); </div><div class="line">  &#125; </div><div class="line">  <span class="comment">/**验证用户名和密码*/</span> </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">final</span>  <span class="keyword">boolean</span> <span class="title">authenticate</span><span class="params">( String user, String password)</span> </span>&#123; </div><div class="line">     String storedPassword = retrieve( user); </div><div class="line">     <span class="keyword">if</span> (storedPassword == <span class="keyword">null</span>) &#123;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">false</span>; </div><div class="line">     &#125;</div><div class="line">     <span class="keyword">if</span> (password == <span class="keyword">null</span>) &#123;</div><div class="line">         password = <span class="string">""</span>; </div><div class="line">       &#125;</div><div class="line">     <span class="keyword">return</span> storedPassword. equals( encrypt( password)); </div><div class="line">   &#125; </div><div class="line">  <span class="comment">/** 保存用户名和加密过的密码 */</span> </div><div class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">store</span><span class="params">( String user, String encryptedPassword)</span></span>; </div><div class="line">  <span class="comment">/** 从用户名获取相应的加密过的密码 */</span> </div><div class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> String <span class="title">retrieve</span><span class="params">( String user)</span></span>; </div><div class="line">  <span class="comment">/**给明文单向加密，默认不加密 */</span> </div><div class="line">  <span class="function"><span class="keyword">protected</span> String <span class="title">encrypt</span><span class="params">( String text)</span> </span>&#123; </div><div class="line">       <span class="keyword">return</span> text; </div><div class="line">      &#125; </div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p>我们可能会这样用：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** 一个简单的验证类，数据放在内存，密码保持明文 */</span></div><div class="line"> <span class="class"><span class="keyword">class</span> <span class="title">SimpleAuthenticator</span> <span class="keyword">extends</span> <span class="title">Authenticator</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> Map&lt; String, String&gt; usrPwd = <span class="keyword">new</span> HashMap&lt; String, String&gt;(); </div><div class="line"></div><div class="line">  <span class="meta">@Override</span> </div><div class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">store</span><span class="params">( String user, String encryptedPassword)</span> </span>&#123; </div><div class="line">      usrPwd.put( user, encryptedPassword); </div><div class="line">    &#125; </div><div class="line">  <span class="meta">@Override</span> </div><div class="line">  <span class="function"><span class="keyword">protected</span> String <span class="title">retrieve</span><span class="params">( String user)</span> </span>&#123; </div><div class="line">      <span class="keyword">return</span> usrPwd.get( user); </div><div class="line">    &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p>这时候考虑到加密方式，我们可能会这样用：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**一个安全的验证类，数据放在内存，密码经过SHA-1加密 */</span> </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ShalAuthenticator</span> <span class="keyword">extends</span> <span class="title">SimpleAuthenticator</span> </span>&#123; </div><div class="line"><span class="comment">// SHA-1算法 </span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String ALGORITHM = <span class="string">"SHA- 1"</span>; </div><div class="line"><span class="comment">// 避免依赖平台 </span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String CHARSET = <span class="string">"UTF- 8"</span>; </div><div class="line"><span class="meta">@Override</span> </div><div class="line"><span class="function"><span class="keyword">protected</span> String <span class="title">encrypt</span><span class="params">( String plainText)</span></span>&#123; </div><div class="line">   <span class="keyword">try</span> &#123; </div><div class="line">       MessageDigest md = MessageDigest.getInstance(ALGORITHM); </div><div class="line">       md.update(plainText.getBytes(CHARSET)); </div><div class="line">       <span class="keyword">byte</span> digest[] = md. digest(); </div><div class="line">       <span class="comment">//为简便起见用到了非标准的API,因此以下代码有警告 </span></div><div class="line">       <span class="keyword">return</span> (<span class="keyword">new</span> BASE64Encoder()).encode( digest);</div><div class="line">    &#125;<span class="keyword">catch</span> (NoSuchAlgorithmException e) &#123;</div><div class="line">       <span class="keyword">throw</span> <span class="keyword">new</span> InternalError(e.getMessage()); </div><div class="line">      &#125; </div><div class="line">     <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123; </div><div class="line">       <span class="keyword">throw</span> <span class="keyword">new</span> InternalError(e.getMessage()); </div><div class="line">      &#125; </div><div class="line">  &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestAuthenticator</span> </span>&#123; </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String[] args)</span> </span>&#123; </div><div class="line">     test( <span class="keyword">new</span> SimpleAuthenticator());</div><div class="line">     test( <span class="keyword">new</span> Sha1Authenticator()); </div><div class="line">    &#125; </div><div class="line">   </div><div class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">( Authenticator authenticator)</span> </span>&#123; </div><div class="line">     <span class="comment">//子类型多态：让不同的实现代码应用于相同的场合</span></div><div class="line">     test(authenticator, <span class="string">"user"</span>, <span class="string">"password"</span>); </div><div class="line">     test(authenticator, <span class="string">"user"</span>, <span class="string">"newPassword"</span>); </div><div class="line">     test(authenticator, <span class="string">"admin"</span>, <span class="string">"admin"</span>); </div><div class="line">     test(authenticator, <span class="string">"guest"</span>, <span class="keyword">null</span>); </div><div class="line">     test(authenticator, <span class="keyword">null</span>, <span class="string">"pass"</span>); </div><div class="line">     authenticator.save(<span class="string">"scott"</span>, <span class="string">"tiger"</span>); </div><div class="line">     <span class="comment">//大小写敏感 </span></div><div class="line">     <span class="keyword">assert</span>(!authenticator.authenticate(<span class="string">"scott"</span>, <span class="string">"TIGER"</span>)); </div><div class="line">     <span class="comment">//大小写敏感 </span></div><div class="line">     <span class="keyword">assert</span>(!authenticator.authenticate(<span class="string">"SCOTT"</span>, <span class="string">"tiger"</span>)); &#125; </div><div class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(Authenticator authenticator, String user, String password)</span></span>&#123; </div><div class="line">     authenticator.save(user,password);</div><div class="line">     <span class="keyword">assert</span>(authenticator.authenticate(user, password)); </div><div class="line">    &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这就是模版方法：固定整体框架和流程以保证可重用性，留出一些子类定制点以保证可扩展性。<br>下面再给出一个更好的设计：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//键值对的存取接口 </span></div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">KeyValueKeeper</span></span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">store</span><span class="params">( String key, String value)</span></span>; </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">retrieve</span><span class="params">( String key)</span></span>; </div><div class="line">&#125;</div><div class="line"><span class="comment">//加密接口 </span></div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Encrypter</span></span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">encrypt</span><span class="params">( String plainText)</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Authenticator</span> </span>&#123; </div><div class="line">  <span class="keyword">private</span> KeyValueKeeper keeper; </div><div class="line">  <span class="keyword">private</span> Encrypter encrypter; </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Authenticator</span><span class="params">( KeyValueKeeper keeper, Encrypter encrypter)</span> </span>&#123; </div><div class="line">    <span class="keyword">this</span>.keeper = keeper; </div><div class="line">    <span class="keyword">this</span>.encrypter = encrypter; </div><div class="line">  &#125; </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">( String user, String password)</span> </span>&#123; </div><div class="line">    <span class="keyword">if</span> (password == <span class="keyword">null</span>) &#123;</div><div class="line">       password = <span class="string">""</span>; </div><div class="line">    &#125;  </div><div class="line">     keeper.store(user, encrypter. encrypt( password));</div><div class="line">  &#125;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">authenticate</span><span class="params">( String user, String password)</span> </span>&#123; </div><div class="line">     String storedPassword = keeper. retrieve( user); </div><div class="line">     <span class="keyword">if</span> (storedPassword == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>; </div><div class="line">     <span class="keyword">if</span> (password == <span class="keyword">null</span>) password = <span class="string">""</span>; </div><div class="line">     <span class="keyword">return</span> storedPassword. equals( encrypter.encrypt( password)); </div><div class="line">  &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MemoryKeeper</span> <span class="keyword">implements</span> <span class="title">KeyValueKeeper</span> </span>&#123; </div><div class="line">  <span class="keyword">private</span> Map&lt; String, String&gt; keyValue = <span class="keyword">new</span> HashMap&lt; String, String&gt;(); </div><div class="line">  <span class="meta">@Override</span> </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">store</span><span class="params">( String key, String value)</span> </span>&#123; </div><div class="line">    keyValue. put( key, value); </div><div class="line">  &#125; </div><div class="line">  <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> String <span class="title">retrieve</span><span class="params">( String key)</span> </span>&#123; </div><div class="line">    <span class="keyword">return</span> keyValue. get( key); </div><div class="line">    &#125; </div><div class="line">&#125; </div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">PlainEncrypter</span> <span class="keyword">implements</span> <span class="title">Encrypter</span> </span>&#123; </div><div class="line">  <span class="meta">@Override</span> </div><div class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">encrypt</span><span class="params">( String plainText)</span> </span>&#123; </div><div class="line">    <span class="keyword">return</span> plainText;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sha1Encrypter</span> <span class="keyword">implements</span> <span class="title">Encrypter</span> </span>&#123; </div><div class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String ALGORITHM = <span class="string">"SHA- 1"</span>;</div><div class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String CHARSET = <span class="string">"UTF- 8"</span>;</div><div class="line">  <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> String <span class="title">encrypt</span><span class="params">( String plainText)</span> </span>&#123; </div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      MessageDigest md = MessageDigest.getInstance(ALGORITHM);</div><div class="line">      md.update( plainText.getBytes(CHARSET)); </div><div class="line">      <span class="keyword">byte</span> digest[] = md.digest();</div><div class="line">      <span class="keyword">return</span>(<span class="keyword">new</span> BASE64Encoder()).encode(digest); </div><div class="line">      &#125; <span class="keyword">catch</span> (NoSuchAlgorithmException e) &#123; </div><div class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> InternalError(e.getMessage()); </div><div class="line">      &#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123; </div><div class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> InternalError(e.getMessage()); </div><div class="line">      &#125; </div><div class="line">  &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestAuthenticator</span> </span>&#123; </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String[] args)</span> </span>&#123;</div><div class="line">   test( <span class="keyword">new</span> Authenticator( <span class="keyword">new</span> MemoryKeeper(), <span class="keyword">new</span> PlainEncrypter())); </div><div class="line">   test( <span class="keyword">new</span> Authenticator( <span class="keyword">new</span> MemoryKeeper(), <span class="keyword">new</span> Sha1Encrypter())); </div><div class="line">   &#125; </div><div class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">( Authenticator authenticator)</span> </span>&#123;</div><div class="line">    <span class="comment">//同上</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这就是策略模式。</p>
+<h1 id="万人迷的类"><a href="#万人迷的类" class="headerlink" title="万人迷的类"></a><strong>万人迷的类</strong></h1><p>一个万人迷的类一定充分体现ADT思想的类：有优雅的外形—抽象，有丰富的内涵—数据，有鲜明的个性—类型<br><img src="/images/ADT.jpeg" alt=""></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h1><p>&emsp;&emsp;抽象能力不止是程序员应该去关注的，其他的行业人员也应该去关注的，因为它能帮助我们简化问题、解决问题<br>但是说了这么多，至于怎么提升却还是显得那么“抽象”，借用下Bob大叔的话：“阅读代码—&gt;而且是阅读大量的优秀代码”，不停的实践。<br>我们程序员平常的工作大抵就是理解业务需求，开始设计，编码实现，维护等，能设计出一个符合参数抽象和规范抽象的接口就是一个难得的程序员了！<br>其实技术和业务哪个重要？我觉得就像语言之争，并没有什么大的意义，我觉得是相辅相成的，业务理解力强有助于技术实现，而技术强能更快的、更好的实现业务需求<br>以上几点纯属胡说八道、不要当真、因为每个人对抽象的理解有角度之分和程度之别</p>
       
     </div>
     
@@ -315,7 +528,7 @@
         <p><span>本文标题:</span><a href="/2017/11/30/我对抽象的理解/">我对抽象的理解</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Robynn</a></p>
         <p><span>发布时间:</span>2017-11-30, 19:52:55</p>
-        <p><span>最后更新:</span>2017-12-08, 10:43:01</p>
+        <p><span>最后更新:</span>2017-12-13, 02:31:45</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/11/30/我对抽象的理解/" title="我对抽象的理解">http://luyis.github.io/2017/11/30/我对抽象的理解/</a>
             <span class="copy-path" data-clipboard-text="原文: http://luyis.github.io/2017/11/30/我对抽象的理解/　　作者: Robynn" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -343,7 +556,7 @@
 <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#程序员的能力"><span class="toc-number">2.</span> <span class="toc-text">程序员的能力</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#抽象的定义"><span class="toc-number">3.</span> <span class="toc-text">抽象的定义</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#抽象的定义"><span class="toc-number">2.</span> <span class="toc-text">抽象的定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#抽象贯穿OOA、OOD、OOP三个阶段，扮演着不同的角色"><span class="toc-number">3.</span> <span class="toc-text">抽象贯穿OOA、OOD、OOP三个阶段，扮演着不同的角色</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#抽象机制"><span class="toc-number">4.</span> <span class="toc-text">抽象机制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#契约式设计与防御式编程"><span class="toc-number">5.</span> <span class="toc-text">契约式设计与防御式编程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五类基本抽象"><span class="toc-number">6.</span> <span class="toc-text">五类基本抽象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据抽象—OOP的核心和起源"><span class="toc-number">7.</span> <span class="toc-text">数据抽象—OOP的核心和起源</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#封装、继承、多态"><span class="toc-number">8.</span> <span class="toc-text">封装、继承、多态</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#万人迷的类"><span class="toc-number">9.</span> <span class="toc-text">万人迷的类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">10.</span> <span class="toc-text">总结</span></a></li></ol>
         
     </div>
     <style>
