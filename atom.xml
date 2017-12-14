@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://luyis.github.io/"/>
-  <updated>2017-12-12T18:31:45.248Z</updated>
+  <updated>2017-12-14T16:34:13.321Z</updated>
   <id>http://luyis.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://luyis.github.io/2017/11/30/%E6%88%91%E5%AF%B9%E6%8A%BD%E8%B1%A1%E7%9A%84%E7%90%86%E8%A7%A3/"/>
     <id>http://luyis.github.io/2017/11/30/我对抽象的理解/</id>
     <published>2017-11-30T11:52:55.000Z</published>
-    <updated>2017-12-12T18:31:45.248Z</updated>
+    <updated>2017-12-14T16:34:13.321Z</updated>
     
     <content type="html"><![CDATA[<p><font color="red" size="6"><strong>郑重声明：本文有误人子弟之嫌，概不负责！胡说八道正式开始～～～</strong></font><br><a id="more"></a></p>
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a><strong>前言</strong></h1><p>&emsp;&emsp;软件设计经常会被拿来和建筑设计去对比、但其实软件设计和它们的区别很大、那就是成型之后，需求是不停的变化、设计是需要响应这些变化的。你有听说过一座竣工的大厦，过一段时间要新加一个楼层就能往上加吗？不能！因为蓝图在设计之初就已经设计不变了，即不支持扩展性！所以软件设计后期随着需求的不停变化、复杂度逐步上升、往往新加一个小功能就影响全局！所以要求我们在软件设计之初就要考虑好后期的扩展性，而抽象无疑是必由之路。抽象本身并不能解决问题，通过抽象能简化和分解问题，使之更容易理解和控制，相应的解法也更具稳定性、普适性、重用性和可维护性。</p>
@@ -221,7 +221,7 @@
 <p>继承的主要作用：通过实现继承完成代码重用；通过接口继承完成代码被重用；建立概念的分类体系。</p>
 </blockquote>
 </blockquote>
-<p>至于怎么合理使用继承，这里就不介绍了，内容太多，没准备～～～主要还是大家多多思考！</p>
+<p>至于怎么合理使用继承，这里就不介绍了，内容太多，没准备，有趣兴可以看看JDK设计的Properties～～～主要还是大家多多思考！</p>
 <p>3、多态是什么？<br>多态是动静结合的产物，将静态类型的安全性和动态类型的灵活性融为一体。<br>静态类型语言中一般有两种实现方式： </p>
 <blockquote>
 <blockquote>
